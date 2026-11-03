@@ -379,32 +379,71 @@ tbody tr:hover td { background: var(--bg-alt); }
 .ex-v.ok { color: var(--ok); }
 
 /* ── FLOW ── */
-.flow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0;
+.flow-outer {
+  overflow-x: auto;
   background: var(--bg-alt);
   border-radius: var(--r);
-  padding: 18px 20px;
+  padding: 24px 28px;
   margin: 20px 0;
-  overflow-x: auto;
+}
+.flow {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  min-width: max-content;
+  gap: 0;
 }
 .flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.flow-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   background: var(--accent);
   color: #fff;
   font-family: var(--ff-title);
   font-size: 12px;
   font-weight: 700;
-  padding: 8px 14px;
-  border-radius: 8px;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.flow-arr {
-  color: var(--fg-subtle);
-  font-size: 16px;
-  padding: 0 7px;
+.flow-label {
+  font-family: var(--ff-title);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  text-align: center;
+}
+.flow-connector {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  padding-bottom: 22px; /* align with circles */
+  align-self: flex-start;
+  margin-top: 9px;
+}
+.flow-connector-line {
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.3;
+}
+.flow-connector-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid var(--accent);
+  opacity: 0.4;
+  margin-left: -1px;
 }
 
 /* ── PROS / CONS ── */
@@ -723,18 +762,20 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
     </div>
 
     <p><strong>Flujo completo de una transacción:</strong></p>
-    <div class="flow">
-      <span class="flow-node">Pago</span>
-      <span class="flow-arr">→</span>
-      <span class="flow-node">Registro</span>
-      <span class="flow-arr">→</span>
-      <span class="flow-node">Procesamiento</span>
-      <span class="flow-arr">→</span>
-      <span class="flow-node">Actualización del saldo</span>
-      <span class="flow-arr">→</span>
-      <span class="flow-node">Cambio de estado</span>
-      <span class="flow-arr">→</span>
-      <span class="flow-node">Disponible para consulta</span>
+    <div class="flow-outer">
+      <div class="flow">
+        <div class="flow-node"><div class="flow-num">1</div><span class="flow-label">Pago</span></div>
+        <div class="flow-connector"><div class="flow-connector-line"></div><div class="flow-connector-arrow"></div></div>
+        <div class="flow-node"><div class="flow-num">2</div><span class="flow-label">Registro</span></div>
+        <div class="flow-connector"><div class="flow-connector-line"></div><div class="flow-connector-arrow"></div></div>
+        <div class="flow-node"><div class="flow-num">3</div><span class="flow-label">Procesamiento</span></div>
+        <div class="flow-connector"><div class="flow-connector-line"></div><div class="flow-connector-arrow"></div></div>
+        <div class="flow-node"><div class="flow-num">4</div><span class="flow-label">Actualización<br>del saldo</span></div>
+        <div class="flow-connector"><div class="flow-connector-line"></div><div class="flow-connector-arrow"></div></div>
+        <div class="flow-node"><div class="flow-num">5</div><span class="flow-label">Cambio<br>de estado</span></div>
+        <div class="flow-connector"><div class="flow-connector-line"></div><div class="flow-connector-arrow"></div></div>
+        <div class="flow-node"><div class="flow-num">6</div><span class="flow-label">Disponible<br>para consulta</span></div>
+      </div>
     </div>
 
     <p>De esta manera, el TPS permite que el área financiera tenga información <strong>organizada, actualizada y trazable</strong>, facilitando el control de las obligaciones y la gestión de cartera.</p>
