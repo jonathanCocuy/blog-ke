@@ -1,0 +1,786 @@
+<title>TPS en Kuepa Edutech</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single-column editorial blog, centered at ~720px */
+:root {
+  --bg:          #F8F7F5;
+  --bg-alt:      #EDECE8;
+  --bg-card:     #FFFFFF;
+  --fg:          #17171A;
+  --fg-muted:    #6C6B72;
+  --fg-subtle:   #A3A2A9;
+  --accent:      #104E8B;
+  --accent-mid:  #1A6CBD;
+  --accent-soft: #E6EEF8;
+  --ok:          #0A7D55;
+  --ok-soft:     #E8F6F0;
+  --warn:        #C0392B;
+  --warn-soft:   #FAECEA;
+  --border:      #E2E0DA;
+  --r:           12px;
+  --ff-title:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --ff-body:     'Inter', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:          #0E1116;
+    --bg-alt:      #161B23;
+    --bg-card:     #1C222C;
+    --fg:          #E2E8F0;
+    --fg-muted:    #8B95A5;
+    --fg-subtle:   #60697A;
+    --accent:      #5BA3F5;
+    --accent-mid:  #5BA3F5;
+    --accent-soft: #0D2140;
+    --ok:          #3DB87A;
+    --ok-soft:     #0C2217;
+    --warn:        #F07070;
+    --warn-soft:   #2D1215;
+    --border:      #2C333E;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:          #0E1116;
+  --bg-alt:      #161B23;
+  --bg-card:     #1C222C;
+  --fg:          #E2E8F0;
+  --fg-muted:    #8B95A5;
+  --fg-subtle:   #60697A;
+  --accent:      #5BA3F5;
+  --accent-mid:  #5BA3F5;
+  --accent-soft: #0D2140;
+  --ok:          #3DB87A;
+  --ok-soft:     #0C2217;
+  --warn:        #F07070;
+  --warn-soft:   #2D1215;
+  --border:      #2C333E;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.72;
+  margin: 0;
+  padding-left:  max(16px, env(safe-area-inset-left,  0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding-block: 15px;
+  padding-inline: max(24px, env(safe-area-inset-left, 0px));
+}
+.nav-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.nav-brand {
+  font-family: var(--ff-title);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+}
+.nav-brand em { color: var(--accent); font-style: normal; }
+.nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+/* ── ARTICLE WRAPPER ── */
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-block: 56px;
+}
+
+/* ── HERO ── */
+.hero { margin-bottom: 52px; }
+
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 100px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--ff-title);
+  font-size: clamp(27px, 5vw, 42px);
+  font-weight: 800;
+  line-height: 1.13;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+
+.meta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  color: var(--fg-muted);
+  font-size: 13px;
+  align-items: center;
+}
+.meta-item { display: flex; align-items: center; gap: 6px; }
+.meta-icon { opacity: .6; }
+
+.hero-rule {
+  width: 42px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin: 26px 0;
+}
+.hero-lead {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--fg-muted);
+}
+.hero-lead strong { color: var(--fg); }
+
+/* ── SECTION ── */
+.section { margin-bottom: 52px; }
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-family: var(--ff-title);
+  font-size: clamp(21px, 3.5vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  margin: 0 0 18px;
+  text-wrap: balance;
+}
+h3 {
+  font-family: var(--ff-title);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: 0 0 6px;
+}
+p { margin: 0 0 16px; }
+p:last-child { margin-bottom: 0; }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  margin: 22px 0;
+}
+table { width: 100%; border-collapse: collapse; min-width: 500px; }
+thead tr { background: var(--bg-alt); }
+th {
+  padding: 11px 16px;
+  text-align: left;
+  font-family: var(--ff-title);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 14px;
+  line-height: 1.55;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--bg-alt); }
+
+.sys-name {
+  font-family: var(--ff-title);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--fg);
+  display: block;
+}
+.sys-code {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+/* ── TX CHIPS ── */
+.tx-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.tx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 13px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--fg);
+}
+
+/* ── CHAR CARDS ── */
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+}
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+}
+.char-num {
+  font-family: var(--ff-title);
+  font-size: 32px;
+  font-weight: 800;
+  -webkit-text-stroke: 2px var(--accent);
+  color: transparent;
+  line-height: 1;
+  margin-bottom: 14px;
+  display: block;
+  user-select: none;
+}
+.char-card h3 { font-size: 15px; margin-bottom: 8px; }
+.char-card p  { font-size: 13.5px; color: var(--fg-muted); line-height: 1.6; margin: 0; }
+
+.formula {
+  margin-top: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--ff-title);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ── STEPS ── */
+.steps { display: flex; flex-direction: column; gap: 0; margin: 24px 0; }
+.step {
+  display: flex;
+  gap: 18px;
+  padding-bottom: 24px;
+  position: relative;
+}
+.step:last-child { padding-bottom: 0; }
+.step-vline {
+  position: absolute;
+  left: 19px;
+  top: 42px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.step:last-child .step-vline { display: none; }
+.step-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--ff-title);
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.step-body { flex: 1; min-width: 0; padding-top: 7px; }
+.step-body p { font-size: 14px; color: var(--fg-muted); margin: 0; }
+
+/* ── EXAMPLE BOX ── */
+.ex-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 18px 22px;
+  margin-top: 14px;
+}
+.ex-label {
+  font-family: var(--ff-title);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.ex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.ex-row:last-child { border-bottom: none; }
+.ex-k { color: var(--fg-muted); }
+.ex-v { font-weight: 600; font-variant-numeric: tabular-nums; }
+.ex-v.ok { color: var(--ok); }
+
+/* ── FLOW ── */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  background: var(--bg-alt);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+.flow-node {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--ff-title);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.flow-arr {
+  color: var(--fg-subtle);
+  font-size: 16px;
+  padding: 0 7px;
+  flex-shrink: 0;
+}
+
+/* ── PROS / CONS ── */
+.pc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 22px 0;
+}
+@media (max-width: 540px) { .pc-grid { grid-template-columns: 1fr; } }
+
+.pc-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+}
+.pc-box.pros { border-top: 3px solid var(--ok); }
+.pc-box.cons { border-top: 3px solid var(--warn); }
+
+.pc-head {
+  font-family: var(--ff-title);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.pros .pc-head { color: var(--ok); }
+.cons .pc-head { color: var(--warn); }
+
+.pc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+.pc-list li {
+  font-size: 13.5px;
+  line-height: 1.5;
+  padding-left: 18px;
+  position: relative;
+  color: var(--fg);
+}
+.pc-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.pros .pc-list li::before { background: var(--ok); }
+.cons .pc-list li::before { background: var(--warn); }
+.pc-list li strong { display: block; font-weight: 600; }
+
+/* ── DIVIDER ── */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding-block: 32px;
+  text-align: center;
+  color: var(--fg-subtle);
+  font-size: 13px;
+  line-height: 1.6;
+}
+</style>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">Kuepa<em>Insights</em></span>
+    <span class="nav-label">Sistemas de Información</span>
+  </div>
+</nav>
+
+<main class="article">
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="tags">
+      <span class="tag">Sistemas de Información</span>
+      <span class="tag">TPS</span>
+      <span class="tag">Gestión Financiera</span>
+    </div>
+
+    <h1>Sistema de Procesamiento de Transacciones aplicado a la gestión financiera de Kuepa Edutech</h1>
+
+    <div class="meta">
+      <span class="meta-item">
+        <svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        3 de noviembre, 2026
+      </span>
+      <span class="meta-item">
+        <svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        8 min de lectura
+      </span>
+    </div>
+
+    <div class="hero-rule"></div>
+
+    <p class="hero-lead">Las organizaciones generan diariamente grandes cantidades de información a partir de sus operaciones: matrículas, pagos, facturas y actualizaciones de datos. Para gestionarla de manera organizada y eficiente, utilizan sistemas de información especializados. Uno de los más fundamentales es el <strong>Sistema de Procesamiento de Transacciones (TPS)</strong>, encargado de registrar, procesar y almacenar las operaciones diarias, garantizando información oportuna y organizada.</p>
+  </header>
+
+  <!-- ── SECCIÓN 1: Tipos de SIG ── -->
+  <section class="section">
+    <p class="eyebrow">Contexto general</p>
+    <h2>¿Qué es un Sistema de Información Gerencial?</h2>
+    <p>Un <strong>Sistema de Información Gerencial (SIG)</strong> es un sistema que recopila, procesa, organiza y presenta información para que los responsables de una empresa puedan tomar decisiones de manera más rápida y acertada. Existen distintos tipos de sistemas, cada uno con un propósito específico dentro de la organización.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo de sistema</th>
+            <th>Función principal</th>
+            <th>Ejemplo aplicado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="sys-name">Procesamiento de Transacciones</span><span class="sys-code">TPS</span></td>
+            <td>Registra y procesa las operaciones diarias de una empresa.</td>
+            <td>Registrar el pago de una cuota de un estudiante.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Automatización de Oficinas</span><span class="sys-code">OAS</span></td>
+            <td>Facilita y automatiza tareas administrativas y de oficina.</td>
+            <td>Usar un calendario para programar reuniones.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Información Gerencial</span><span class="sys-code">SIG / MIS</span></td>
+            <td>Organiza los datos y genera informes para supervisar actividades.</td>
+            <td>Generar un reporte mensual de cartera.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Soporte a las Decisiones</span><span class="sys-code">DSS</span></td>
+            <td>Analiza información para ayudar a elegir entre diferentes alternativas.</td>
+            <td>Analizar qué estrategia de cobro puede recuperar más cartera.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Información Ejecutiva</span><span class="sys-code">EIS / ESS</span></td>
+            <td>Presenta información resumida y relevante para que los directivos tomen decisiones.</td>
+            <td>Un tablero que muestra los ingresos y gastos de la empresa.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Planificación de Recursos Empresariales</span><span class="sys-code">ERP</span></td>
+            <td>Integra diferentes áreas y procesos de una empresa en un mismo sistema.</td>
+            <td>Un sistema que conecta finanzas, recursos humanos y compras.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Gestión de Relaciones con Clientes</span><span class="sys-code">CRM</span></td>
+            <td>Administra la información y las interacciones con clientes o usuarios.</td>
+            <td>Registrar las comunicaciones realizadas con un estudiante.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Gestión de la Cadena de Suministro</span><span class="sys-code">SCM</span></td>
+            <td>Controla y coordina procesos relacionados con proveedores, compras y distribución.</td>
+            <td>Registrar un pedido realizado a un proveedor.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Inteligencia de Negocios</span><span class="sys-code">BI</span></td>
+            <td>Analiza grandes cantidades de datos para identificar tendencias y facilitar decisiones.</td>
+            <td>Analizar qué meses tienen mayor nivel de morosidad.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Gestión del Conocimiento</span><span class="sys-code">KMS</span></td>
+            <td>Permite almacenar, organizar y compartir el conocimiento de una organización.</td>
+            <td>Una plataforma con manuales e instructivos para los empleados.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Sistemas Expertos</span><span class="sys-code">SE</span></td>
+            <td>Utilizan conocimientos y reglas para apoyar la solución de problemas o la toma de decisiones.</td>
+            <td>Un sistema que recomienda una acción según las condiciones de un caso.</td>
+          </tr>
+          <tr>
+            <td><span class="sys-name">Inteligencia Artificial</span><span class="sys-code">IA</span></td>
+            <td>Analizan datos y patrones para realizar predicciones, recomendaciones o automatizar tareas.</td>
+            <td>Predecir qué clientes podrían dejar de pagar.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ── SECCIÓN 2: Qué es TPS ── -->
+  <section class="section">
+    <p class="eyebrow">El sistema en foco</p>
+    <h2>¿Qué es un Sistema de Procesamiento de Transacciones?</h2>
+    <p>Un <strong>Sistema de Procesamiento de Transacciones (TPS)</strong> es un sistema de información diseñado para registrar, procesar, almacenar y controlar las operaciones rutinarias que se realizan dentro de una organización. Las transacciones son actividades que ocurren de manera frecuente y que generan información que debe quedar registrada de forma sistemática.</p>
+    <p>El TPS permite que estas operaciones sean procesadas de manera ordenada y que la información resultante pueda ser utilizada posteriormente por otros sistemas y por los diferentes niveles de la organización.</p>
+    <p><strong>Algunos ejemplos de transacciones en Kuepa Edutech:</strong></p>
+    <div class="tx-grid">
+      <span class="tx-chip">💳 Realizar un pago</span>
+      <span class="tx-chip">🧾 Generar una factura</span>
+      <span class="tx-chip">📋 Registrar una matrícula</span>
+      <span class="tx-chip">📆 Crear una cuota</span>
+      <span class="tx-chip">↩️ Registrar una devolución</span>
+      <span class="tx-chip">🔄 Actualizar estado de cuenta</span>
+      <span class="tx-chip">🤝 Registrar acuerdo de pago</span>
+      <span class="tx-chip">🏷️ Aplicar un descuento</span>
+      <span class="tx-chip">✍️ Registrar una inscripción</span>
+      <span class="tx-chip">📄 Generar comprobante de pago</span>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ── SECCIÓN 3: Características ── -->
+  <section class="section">
+    <p class="eyebrow">Fundamentos técnicos</p>
+    <h2>Características principales de un TPS</h2>
+    <p>Los sistemas TPS se distinguen por cinco atributos que los hacen indispensables en entornos de alta actividad transaccional como el de una institución educativa:</p>
+
+    <div class="char-grid">
+      <div class="char-card">
+        <span class="char-num">01</span>
+        <h3>Capacidad masiva</h3>
+        <p>Procesa cientos o miles de transacciones diarias sin intervención manual, desde pagos y matrículas hasta actualización de saldos.</p>
+      </div>
+      <div class="char-card">
+        <span class="char-num">02</span>
+        <h3>Rapidez</h3>
+        <p>Cuando un estudiante realiza un pago, la información se registra oportunamente, evitando que figure como pendiente cuando ya fue cancelada.</p>
+      </div>
+      <div class="char-card">
+        <span class="char-num">03</span>
+        <h3>Precisión</h3>
+        <p>Calcula automáticamente valores y saldos, reduciendo errores matemáticos y facilitando el control financiero.</p>
+        <div class="formula">Cuota &minus; Pago = Saldo pendiente</div>
+      </div>
+      <div class="char-card">
+        <span class="char-num">04</span>
+        <h3>Confiabilidad</h3>
+        <p>La información permanece disponible y organizada para consultas posteriores: fecha, valor pagado, referencia, concepto y saldo restante.</p>
+      </div>
+      <div class="char-card">
+        <span class="char-num">05</span>
+        <h3>Seguridad</h3>
+        <p>El acceso a la información está controlado según las funciones de cada usuario, protegiendo los datos financieros y personales de los estudiantes.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ── SECCIÓN 4: Caso aplicado ── -->
+  <section class="section">
+    <p class="eyebrow">Caso aplicado</p>
+    <h2>El TPS en la gestión financiera de Kuepa Edutech</h2>
+    <p>En Kuepa Edutech, el TPS puede aplicarse principalmente a los procesos financieros relacionados con los pagos y obligaciones económicas de los estudiantes. Debido a que diariamente se generan diferentes transacciones, es necesario contar con un sistema que permita registrarlas, procesarlas y mantener actualizada la información.</p>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-vline"></div>
+        <div class="step-body">
+          <h3>Registro de las obligaciones</h3>
+          <p>El sistema registra las obligaciones económicas asociadas a cada estudiante: cuotas, fechas de vencimiento y valores correspondientes.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-vline"></div>
+        <div class="step-body">
+          <h3>Procesamiento de pagos</h3>
+          <p>Cuando un estudiante realiza un pago, la transacción queda registrada con el valor pagado, fecha, referencia y concepto.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-vline"></div>
+        <div class="step-body">
+          <h3>Actualización automática</h3>
+          <p>Una vez procesado el pago, el sistema actualiza automáticamente el estado de la obligación y el saldo pendiente del estudiante.</p>
+          <div class="ex-box">
+            <div class="ex-label">Ejemplo de actualización</div>
+            <div class="ex-row"><span class="ex-k">Cuota</span><span class="ex-v">$349.000</span></div>
+            <div class="ex-row"><span class="ex-k">Pago realizado</span><span class="ex-v">$349.000</span></div>
+            <div class="ex-row"><span class="ex-k">Saldo pendiente</span><span class="ex-v">$0</span></div>
+            <div class="ex-row"><span class="ex-k">Estado</span><span class="ex-v ok">✓ Pagada</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-vline"></div>
+        <div class="step-body">
+          <h3>Seguimiento de cartera</h3>
+          <p>La información procesada permite identificar estudiantes con cuotas pendientes o vencidas, facilitando el seguimiento del área financiera.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-vline"></div>
+        <div class="step-body">
+          <h3>Generación de información</h3>
+          <p>Los datos almacenados se utilizan para generar reportes de pagos, saldos, cartera vencida y recuperación de cartera.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-vline"></div>
+        <div class="step-body">
+          <h3>Apoyo a la gestión</h3>
+          <p>Aunque el TPS tiene principalmente una función operativa, la información que genera sirve como base para otros sistemas y para la toma de decisiones estratégicas.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p><strong>Flujo completo de una transacción:</strong></p>
+    <div class="flow">
+      <span class="flow-node">Pago</span>
+      <span class="flow-arr">→</span>
+      <span class="flow-node">Registro</span>
+      <span class="flow-arr">→</span>
+      <span class="flow-node">Procesamiento</span>
+      <span class="flow-arr">→</span>
+      <span class="flow-node">Actualización del saldo</span>
+      <span class="flow-arr">→</span>
+      <span class="flow-node">Cambio de estado</span>
+      <span class="flow-arr">→</span>
+      <span class="flow-node">Disponible para consulta</span>
+    </div>
+
+    <p>De esta manera, el TPS permite que el área financiera tenga información <strong>organizada, actualizada y trazable</strong>, facilitando el control de las obligaciones y la gestión de cartera.</p>
+  </section>
+
+  <hr class="div">
+
+  <!-- ── SECCIÓN 5: Ventajas y Desventajas ── -->
+  <section class="section">
+    <p class="eyebrow">Análisis comparativo</p>
+    <h2>Ventajas y Desventajas</h2>
+    <p>Como todo sistema de información, el TPS presenta tanto fortalezas que lo hacen indispensable como limitaciones que deben considerarse en su implementación y mantenimiento.</p>
+
+    <div class="pc-grid">
+      <div class="pc-box pros">
+        <div class="pc-head">✦ Ventajas</div>
+        <ul class="pc-list">
+          <li><strong>Agiliza los procesos</strong>Registra y procesa grandes volúmenes de transacciones rápidamente.</li>
+          <li><strong>Reduce errores</strong>Automatiza cálculos y registros, disminuyendo errores humanos.</li>
+          <li><strong>Información actualizada</strong>Permite conocer oportunamente el estado de pagos y saldos.</li>
+          <li><strong>Mejora el control</strong>Facilita el seguimiento de cuotas, pagos y obligaciones pendientes.</li>
+          <li><strong>Aumenta la productividad</strong>Reduce el tiempo dedicado a tareas repetitivas y manuales.</li>
+          <li><strong>Facilita la trazabilidad</strong>Permite consultar el historial completo de transacciones.</li>
+          <li><strong>Genera reportes</strong>Los datos procesados se convierten en informes financieros útiles.</li>
+          <li><strong>Mejora la atención</strong>Permite consultar con rapidez pagos, saldos y estados de cuenta.</li>
+        </ul>
+      </div>
+      <div class="pc-box cons">
+        <div class="pc-head">✦ Desventajas</div>
+        <ul class="pc-list">
+          <li><strong>Dependencia tecnológica</strong>Una falla del sistema puede afectar los procesos de pago y consulta.</li>
+          <li><strong>Costos de implementación</strong>Requiere inversión en software, infraestructura y mantenimiento.</li>
+          <li><strong>Riesgos de seguridad</strong>La información financiera debe protegerse contra accesos no autorizados.</li>
+          <li><strong>Necesidad de capacitación</strong>Los empleados deben aprender a utilizar correctamente el sistema.</li>
+          <li><strong>Datos incorrectos</strong>Si se ingresa información errónea, el sistema genera resultados incorrectos.</li>
+          <li><strong>Mantenimiento constante</strong>Necesita actualizaciones, soporte técnico y controles periódicos.</li>
+          <li><strong>Dependencia de conectividad</strong>Algunos sistemas requieren conexión estable para funcionar.</li>
+          <li><strong>Riesgo de interrupción</strong>Una falla puede retrasar temporalmente las operaciones financieras.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <p>Blog académico · Sistemas de Información Gerencial<br>Kuepa Edutech · 2026</p>
+  </footer>
+
+</main>
