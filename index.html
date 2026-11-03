@@ -500,6 +500,42 @@ tbody tr:hover td { background: var(--bg-alt); }
 /* ── DIVIDER ── */
 hr.div { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
 
+/* ── MOBILE ── */
+@media (max-width: 600px) {
+  .article { padding-block: 28px; }
+  .hero { margin-bottom: 32px; }
+  .hero-rule { margin: 18px 0; }
+  .hero-lead { font-size: 15px; }
+  .section { margin-bottom: 36px; }
+  hr.div { margin: 32px 0; }
+
+  .nav { padding-block: 12px; }
+
+  .tbl-wrap { font-size: 13px; }
+  th, td { padding: 10px 12px; }
+
+  .tx-grid { gap: 6px; }
+  .tx-chip { font-size: 12.5px; padding: 7px 10px; }
+
+  .char-grid { grid-template-columns: 1fr; gap: 10px; }
+  .char-card { padding: 18px; }
+  .char-num { font-size: 26px; margin-bottom: 10px; }
+
+  .flow-outer { padding: 16px 14px; }
+  .flow-connector { padding: 0 2px; padding-bottom: 22px; margin-top: 9px; }
+  .flow-connector-line { width: 14px; }
+  .flow-num { width: 26px; height: 26px; font-size: 11px; }
+  .flow-label { font-size: 11px; }
+
+  .step { gap: 14px; padding-bottom: 20px; }
+  .step-vline { left: 17px; }
+  .step-num { width: 36px; height: 36px; font-size: 13px; }
+  .ex-box { padding: 14px 16px; }
+
+  .pc-grid { gap: 12px; }
+  .pc-box { padding: 18px; }
+}
+
 /* ── FOOTER ── */
 .footer {
   border-top: 1px solid var(--border);
