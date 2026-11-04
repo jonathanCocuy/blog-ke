@@ -500,6 +500,68 @@ tbody tr:hover td { background: var(--bg-alt); }
 /* ── DIVIDER ── */
 hr.div { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
 
+/* ── REFERENCIAS ── */
+.ref-list {
+  list-style: none;
+  padding: 0;
+  margin: 22px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ref-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px 20px;
+}
+.ref-num {
+  font-family: var(--ff-title);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.ref-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.ref-title {
+  font-family: var(--ff-title);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fg);
+}
+.ref-source {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.ref-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-all;
+  font-weight: 500;
+}
+.ref-link:hover { text-decoration: underline; }
+
 /* ── MOBILE ── */
 @media (max-width: 600px) {
   .article { padding-block: 28px; }
@@ -854,6 +916,38 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
         </ul>
       </div>
     </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ── REFERENCIAS ── -->
+  <section class="section">
+    <p class="eyebrow">Fuentes consultadas</p>
+    <h2>Referencias</h2>
+    <ol class="ref-list">
+      <li class="ref-item">
+        <div class="ref-num">01</div>
+        <div class="ref-body">
+          <span class="ref-title">Tipos de Sistemas de Información Gerencial</span>
+          <span class="ref-source">Web y Empresas</span>
+          <a class="ref-link" href="https://www.webyempresas.com/tipos-de-sistemas-de-informacion-gerencial/" target="_blank" rel="noopener">
+            webyempresas.com/tipos-de-sistemas-de-informacion-gerencial
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <div class="ref-num">02</div>
+        <div class="ref-body">
+          <span class="ref-title">Transaction Processing System (TPS)</span>
+          <span class="ref-source">IBM Think</span>
+          <a class="ref-link" href="https://www.ibm.com/mx-es/think/topics/transaction-processing-system" target="_blank" rel="noopener">
+            ibm.com/mx-es/think/topics/transaction-processing-system
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <!-- ── FOOTER ── -->
